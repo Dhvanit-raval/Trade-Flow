@@ -11,7 +11,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/user", {
+        const { data } = await axios.get("https://backend-cbjp.onrender.com/user", {
           withCredentials: true,
         });
         if (data.status) {
