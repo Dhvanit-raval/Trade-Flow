@@ -7,7 +7,7 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/allOrders").then((res) => {
+    axios.get("https://backend-cbjp.onrender.com/allOrders").then((res) => {
       setAllOrders(res.data);
     });
   }, []);
@@ -51,7 +51,8 @@ const Orders = () => {
           </Link>
         </div>
       ) : (
-        <div className="order-table">
+        <>
+          <div className="order-table">
           <table>
             <thead>
               <tr>
@@ -74,8 +75,9 @@ const Orders = () => {
               })}
             </tbody>
           </table>
+          </div>
           <LineChart data={data} />
-        </div>
+        </>
       )}
     </div>
   );

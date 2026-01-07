@@ -62,11 +62,6 @@ const Menu = () => {
               <p className={getMenuClass("/funds")}>Funds</p>
             </Link>
           </li>
-          <li>
-            <Link style={{ textDecoration: "none" }} to="/apps" onClick={() => setIsMenuOpen(false)}>
-              <p className={getMenuClass("/apps")}>Apps</p>
-            </Link>
-          </li>
         </ul>
         <hr />
         <div className="profile" >

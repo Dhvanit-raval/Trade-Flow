@@ -6,7 +6,7 @@ const Positions = () => {
   const [allPosition, setAllPosition] = useState([]);
 
   useEffect(() => { // To fetch the data comming from api end-point in json response and with the help of axios we get it.
-    axios.get("http://localhost:3000/allPosition").then((res) => {
+    axios.get("https://backend-cbjp.onrender.com/allPosition").then((res) => {
       setAllPosition(res.data);
     })
   }, []);

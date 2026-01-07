@@ -71,7 +71,39 @@ app.post("/newOrder", async (req, res) => {
     mode: req.body.mode,
   });
 
-  newOrder.save();
+  await newOrder.save();
+
+  if (req.body.mode === "Buy") {
+    let holding = await HoldingsModel.findOne({ name: req.body.name });
+    if (holding) {
+      let newQty = parseInt(holding.qty) + parseInt(req.body.qty);
+      let newAvg = ((holding.avg * holding.qty) + (req.body.price * req.body.qty)) / newQty;
+      holding.qty = newQty;
+      holding.avg = newAvg;
+      await holding.save();
+    } else {
+      let newHolding = new HoldingsModel({
+        name: req.body.name,
+        qty: req.body.qty,
+        avg: req.body.price,
+        price: req.body.price,
+        net: "0.0%",
+        day: "0.0%",
+      });
+      await newHolding.save();
+    }
+  } else if (req.body.mode === "Sell") {
+    let holding = await HoldingsModel.findOne({ name: req.body.name });
+    if (holding) {
+      let newQty = parseInt(holding.qty) - parseInt(req.body.qty);
+      if (newQty <= 0) {
+        await HoldingsModel.deleteOne({ name: req.body.name });
+      } else {
+        holding.qty = newQty;
+        await holding.save();
+      }
+    }
+  }
 
   res.send("Order saved!");
 });

@@ -4,12 +4,14 @@ import axios from "axios";
 import { VerticleGraph } from "./VerticleGrapg";
 
 
+
+
 const Holdings = () => {
 
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => { // To fetch the data comming from api end-point in json response and with the help of axios we get it.
-    axios.get("http://localhost:3000/allHoldings").then((res) => {
+    axios.get("https://backend-cbjp.onrender.com/allHoldings").then((res) => {
       setAllHoldings(res.data);
     })
   }, []);

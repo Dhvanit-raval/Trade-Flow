@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "./BuyActionWindow.css";
 
-const BuyActionWindow = ({ uid, closeBuyWindow }) => {
+const BuyActionWindow = ({ uid, closeBuyWindow, mode }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
@@ -14,7 +14,7 @@ const BuyActionWindow = ({ uid, closeBuyWindow }) => {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
-      mode: "Buy",
+      mode: mode,
     });
 
     closeBuyWindow();
@@ -56,7 +56,7 @@ const BuyActionWindow = ({ uid, closeBuyWindow }) => {
         <span>Margin required ₹140.65</span>
         <div>
           <Link to="" className="btn btn-blue" onClick={handleBuyClick}>
-            Buy
+            {mode}
           </Link>
           <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
             Cancel
